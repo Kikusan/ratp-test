@@ -19,7 +19,7 @@ const formatData = (data) => {
   return data.map((record) => ({
     name: record.fields && record.fields.stop_name,
     coordinates: record.fields && record.fields.stop_coordinates,
-    recordid: record.recordid,
+    id: record.fields && record.fields.stop_id,
     description: record.fields && record.fields.stop_desc,
   }));
 };

@@ -50,7 +50,7 @@ describe("coordinateService", () => {
         {
           name: "NEUILLY-PLAISANCE RER.",
           coordinates: [48.85296447651706, 2.5147940192726432],
-          recordid: "54f4af08a5f58e355773427e3b7d08072551e6c8",
+          id: "3682834",
           description: "22-24 BOULEVARD GALLIENI - 93049",
         },
       ];
