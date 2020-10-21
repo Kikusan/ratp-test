@@ -1,0 +1,145 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "ratp api test",
+    "version": "1.0.0",
+    "title": "Swagger ratp test"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+  ],
+  "schemes": [
+   
+  ],
+  "paths": {
+    "/coordinate": {
+      "get": {
+        "summary": "get location coordinates",
+        "description": "Retrieve all coordinates that fits the location name.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location",
+            "in": "query",
+            "description": "will search sets that contain the given title (no fuzzy for now)",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Coordinates"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "403": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "docgen_auth": [
+              "read:docgenApi"
+            ]
+          }
+        ]
+      }
+    }
+  },
+
+  "definitions": {
+    "coordinateGeometries": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/coordinateGeometry"
+          }
+        }
+      }
+    },
+    "coordinateGeometry": {
+        "type": {
+          "type": "string"
+        },
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "coordinate data"
+        }
+      },
+    "coordinateFields": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/coordinateField"
+          }
+        }
+      }
+    },
+    "coordinateField": {
+      "type": "object",
+      "properties": {
+        "stop_coordinates": {
+          "type": "array",
+           "items": {
+            "type": "integer"
+          },
+          "description": "coordinate data"
+        },
+        "stop_desc": {
+          "type": "string"
+        },
+        "stop_name": {
+          "type": "string"
+        },
+        "stop_id": {
+          "type": "string"
+        }
+      }
+    },
+    "Coordinates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coordinate"
+          }
+        },
+    "Coordinate": {
+      "type": "object",
+      "properties": {
+        "datasetid": {
+          "type": "string",
+          "description": "dataset id"
+        },
+        "recordid": {
+          "type": "string",
+           "description": "record id"
+        },
+        "fields": {
+          "$ref": "#/definitions/coordinateFields"
+        },
+        "geometry": {
+           "$ref": "#/definitions/coordinateGeometries"
+        },
+        "record_timestamp": {
+           "type": "string",
+          "description": "last record time"
+        }
+      }
+    }
+  }
+}
