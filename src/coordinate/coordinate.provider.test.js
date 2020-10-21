@@ -5,7 +5,6 @@ describe("Coordinate Provider", () => {
   let coordinateProxy;
 
   describe("get", () => {
-    let expected;
     let result;
     let fetchMock;
     let querystringMock;
@@ -32,7 +31,7 @@ describe("Coordinate Provider", () => {
         it("should call fetchMock", () => {
           expect(fetchMock).toHaveBeenCalled();
         });
-        it("should return array of jobs", () => {
+        it("should return array of coordinates", () => {
           expect(result).toEqual({ data: [{}, {}] });
         });
       });
@@ -49,14 +48,20 @@ describe("Coordinate Provider", () => {
             fetch: fetchMock,
             querystring: querystringMock,
           });
-          result = await coordinateProxy.get("val de fontenay");
+          const params = {
+            location: "val de fontenay",
+            page: 3,
+            itemPerPage: 20,
+            sortByName: "desc",
+          };
+          result = await coordinateProxy.get(params);
         });
         it("should call fetchMock", () => {
           expect(fetchMock).toHaveBeenCalledWith(
-            `https://data.ratp.fr/api/records/1.0/search/?dataset=positions-geographiques-des-stations-du-reseau-ratp&facet=stop_name&q=val+de+fontenay`
+            `https://data.ratp.fr/api/records/1.0/search/?dataset=positions-geographiques-des-stations-du-reseau-ratp&facet=stop_name&q=val+de+fontenay&rows=20&start=40&sort=-stop_name`
           );
         });
-        it("should return array of jobs", () => {
+        it("should return array of coordinates", () => {
           expect(result).toEqual({ data: [{}, {}] });
         });
       });

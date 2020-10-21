@@ -24,8 +24,30 @@
           {
             "name": "location",
             "in": "query",
-            "description": "will search sets that contain the given title (no fuzzy for now)",
+            "description": "will search coordinates that contain the given location",
             "type": "string"
+          },
+           {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "type": "integer"
+          },
+           {
+            "name": "item-per-page",
+            "in": "query",
+            "description": "item per page",
+            "type": "integer"
+          },
+           {
+            "name": "sort-by-name",
+            "in": "query",
+            "description": "will search sets that contain the given title (no fuzzy for now)",
+            "type": "string",
+            "enum": [
+                "desc",
+                "asc"
+              ]
           }
         ],
         "responses": {
@@ -57,61 +79,6 @@
   },
 
   "definitions": {
-    "coordinateGeometries": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/coordinateGeometry"
-          }
-        }
-      }
-    },
-    "coordinateGeometry": {
-        "type": {
-          "type": "string"
-        },
-        "coordinates": {
-          "type": "array",
-          "items": {
-            "type": "integer"
-          },
-          "description": "coordinate data"
-        }
-      },
-    "coordinateFields": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/coordinateField"
-          }
-        }
-      }
-    },
-    "coordinateField": {
-      "type": "object",
-      "properties": {
-        "stop_coordinates": {
-          "type": "array",
-           "items": {
-            "type": "integer"
-          },
-          "description": "coordinate data"
-        },
-        "stop_desc": {
-          "type": "string"
-        },
-        "stop_name": {
-          "type": "string"
-        },
-        "stop_id": {
-          "type": "string"
-        }
-      }
-    },
     "Coordinates": {
           "type": "array",
           "items": {
@@ -121,23 +88,24 @@
     "Coordinate": {
       "type": "object",
       "properties": {
-        "datasetid": {
+        "name": {
           "type": "string",
-          "description": "dataset id"
+          "description": "location name"
         },
         "recordid": {
           "type": "string",
            "description": "record id"
         },
-        "fields": {
-          "$ref": "#/definitions/coordinateFields"
+       "coordinates": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "coordinate data"
         },
-        "geometry": {
-           "$ref": "#/definitions/coordinateGeometries"
-        },
-        "record_timestamp": {
-           "type": "string",
-          "description": "last record time"
+        "description": {
+          "type": "string",
+           "description": "record id"
         }
       }
     }

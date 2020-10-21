@@ -4,9 +4,9 @@ const makeBoredService = ({ coordinateProvider } = {}) => {
   }
 
   const api = {
-    get: async (location) => {
-      const data = await coordinateProvider.get(location);
-      return data.records;
+    get: async (params) => {
+      const data = await coordinateProvider.get(params);
+      return formatData(data.records);
     },
   };
 
@@ -14,3 +14,12 @@ const makeBoredService = ({ coordinateProvider } = {}) => {
 };
 
 module.exports = makeBoredService;
+
+const formatData = (data) => {
+  return data.map((record) => ({
+    name: record.fields && record.fields.stop_name,
+    coordinates: record.fields && record.fields.stop_coordinates,
+    recordid: record.recordid,
+    description: record.fields && record.fields.stop_desc,
+  }));
+};

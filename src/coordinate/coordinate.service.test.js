@@ -45,8 +45,16 @@ describe("coordinateService", () => {
     it("should call coordinateProvider.get() with the correct params", () => {
       expect(coordinateProvider.get).toHaveBeenCalledWith("neuilly-plaisance");
     });
-    it("should return array of jobs", () => {
-      expect(result).toEqual(dataSample.records);
+    it("should return array of coordinate", () => {
+      const exprectedResult = [
+        {
+          name: "NEUILLY-PLAISANCE RER.",
+          coordinates: [48.85296447651706, 2.5147940192726432],
+          recordid: "54f4af08a5f58e355773427e3b7d08072551e6c8",
+          description: "22-24 BOULEVARD GALLIENI - 93049",
+        },
+      ];
+      expect(result).toEqual(exprectedResult);
     });
   });
 });

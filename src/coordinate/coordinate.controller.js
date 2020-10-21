@@ -1,13 +1,19 @@
 function makeCoordinateController({ coordinateService } = {}) {
   if (!coordinateService) {
-    throw new error("CoordinateController");
+    throw new Error("CoordinateController");
   }
 
   const api = {
     get: async (req, res, next) => {
-      const location = req.query.location;
+      const params = {
+        location: req.query.location,
+        page: req.query.page,
+        itemPerPage: req.query["item-per-page"],
+        sortByName: req.query["sort-by-name"],
+      };
+
       try {
-        const results = await coordinateService.get(location);
+        const results = await coordinateService.get(params);
         res.status(200).send(results);
       } catch (error) {
         next(error);

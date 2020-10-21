@@ -30,21 +30,29 @@ describe("Coordinate Controller", () => {
         it("should return status 200", () => {
           expect(response.__status).toEqual(200);
         });
-        it("should return an array of job", () => {
+        it("should return an array of coordinates", () => {
           expect(response.__content).toEqual([{}, {}]);
         });
       });
       describe("with params", () => {
         beforeEach(() => {
           request = new FakeRequest({
-            query: { location: "neuilly-plaisance" },
+            query: {
+              location: "neuilly-plaisance",
+              "sort-by-name": "desc",
+              page: 2,
+              "item-per-page": 20,
+            },
           });
           coordinateController.get(request, response);
         });
         it("should call coordinateService.get", () => {
-          expect(coordinateService.get).toHaveBeenCalledWith(
-            "neuilly-plaisance"
-          );
+          expect(coordinateService.get).toHaveBeenCalledWith({
+            location: "neuilly-plaisance",
+            sortByName: "desc",
+            page: 2,
+            itemPerPage: 20,
+          });
         });
       });
     });
