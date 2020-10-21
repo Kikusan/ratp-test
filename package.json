@@ -1,0 +1,29 @@
+{
+  "name": "ratp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node src/server.js",
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.12.1",
+    "jest": "^26.5.3",
+    "jest-fetch-mock": "^3.0.3",
+    "nodemon": "^2.0.4",
+    "supertest": "^5.0.0"
+  },
+  "dependencies": {
+    "babel-jest": "^26.5.2",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1"
+  }
+}
